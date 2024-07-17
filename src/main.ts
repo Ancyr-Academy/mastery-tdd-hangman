@@ -1,13 +1,6 @@
 import {DisplayInterface, Game, InputInterface, WordGeneratorInterface} from "./hangman.js";
 import prompt from 'prompt';
-
-class FixedWordGenerator implements WordGeneratorInterface {
-  constructor(private readonly word: string) {}
-
-  async generate() {
-    return this.word;
-  }
-}
+import {FileWordGenerator} from "./file-word-generator.js";
 
 class ConsoleInput implements InputInterface {
   constructor() {
@@ -40,7 +33,7 @@ class ConsoleDisplay implements DisplayInterface {
 
 function main() {
   const game = new Game(
-    new FixedWordGenerator("WORD"),
+    new FileWordGenerator('./src/dictionnary.txt'),
     10,
     new ConsoleInput(),
     new ConsoleDisplay()
